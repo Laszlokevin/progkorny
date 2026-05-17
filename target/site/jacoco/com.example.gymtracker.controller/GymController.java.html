@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GymController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gymtracker</a> &gt; <a href="index.source.html" class="el_package">com.example.gymtracker.controller</a> &gt; <span class="el_source">GymController.java</span></div><h1>GymController.java</h1><pre class="source lang-java linenums">package com.example.gymtracker.controller;
+
+import com.example.gymtracker.model.WorkoutDay;
+import com.example.gymtracker.model.Exercise;
+import com.example.gymtracker.service.WorkoutService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class GymController {
+
+    private final WorkoutService workoutService;
+
+<span class="nc" id="L17">    public GymController(WorkoutService workoutService) {</span>
+<span class="nc" id="L18">        this.workoutService = workoutService;</span>
+<span class="nc" id="L19">    }</span>
+
+    // 1. Új edzés indítása
+    @PostMapping(&quot;/workouts&quot;)
+    public WorkoutDay startWorkout(@RequestParam String type) {
+<span class="nc" id="L24">        return workoutService.startWorkout(type);</span>
+    }
+
+    // 2. Edzés lekérdezése ID alapján
+    @GetMapping(&quot;/workouts/{id}&quot;)
+    public Optional&lt;WorkoutDay&gt; getWorkout(@PathVariable Long id) {
+<span class="nc" id="L30">        return workoutService.getWorkout(id);</span>
+    }
+
+    // 3. Utolsó bizonyos típusú edzés visszaadása
+    @GetMapping(&quot;/workouts/last/{type}&quot;)
+    public Optional&lt;WorkoutDay&gt; getLastByType(@PathVariable String type) {
+<span class="nc" id="L36">        return workoutService.getLastWorkoutByType(type);</span>
+    }
+
+    // 4. Gyakorlat hozzáadása edzéshez
+    @PostMapping(&quot;/workouts/{id}/exercises&quot;)
+    public WorkoutDay addExercise(@PathVariable Long id, @RequestBody Exercise ex) {
+<span class="nc" id="L42">        return workoutService.addExercise(id, ex);</span>
+    }
+
+    // 5. Gyakorlat frissítése
+    @PutMapping(&quot;/exercises/{id}&quot;)
+    public Exercise updateExercise(@PathVariable Long id, @RequestParam int repetitions, @RequestParam int intensity) {
+<span class="nc" id="L48">        return workoutService.updateExercise(id, repetitions, intensity);</span>
+    }
+
+    // 6. Gyakorlat törlése
+    @DeleteMapping(&quot;/exercises/{id}&quot;)
+    public void deleteExercise(@PathVariable Long id) {
+<span class="nc" id="L54">        workoutService.deleteExercise(id);</span>
+<span class="nc" id="L55">    }</span>
+
+    // 7. Edzés törlése
+    @DeleteMapping(&quot;/workouts/{id}&quot;)
+    public void deleteWorkout(@PathVariable Long id) {
+<span class="nc" id="L60">        workoutService.deleteWorkout(id);</span>
+<span class="nc" id="L61">    }</span>
+
+    // 8. Edzés típusának változtatása
+    @PutMapping(&quot;/workouts/{id}&quot;)
+    public WorkoutDay updateWorkout(@PathVariable Long id, @RequestParam String type) {
+<span class="nc" id="L66">        return workoutService.updateWorkout(id, type);</span>
+    }
+
+    // 9. Minden edzés lekérdezése
+    @GetMapping(&quot;/workouts&quot;)
+    public List&lt;WorkoutDay&gt; getAll() {
+<span class="nc" id="L72">        return workoutService.getAllWorkouts();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="hu"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WorkoutService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gymtracker</a> &gt; <a href="index.source.html" class="el_package">com.example.gymtracker.service</a> &gt; <span class="el_source">WorkoutService.java</span></div><h1>WorkoutService.java</h1><pre class="source lang-java linenums">package com.example.gymtracker.service;
+
+import com.example.gymtracker.model.WorkoutDay;
+import com.example.gymtracker.model.Exercise;
+import com.example.gymtracker.repository.WorkoutDayRepository;
+import com.example.gymtracker.repository.ExerciseRepository;
+import org.springframework.stereotype.Service;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class WorkoutService {
+
+    private final WorkoutDayRepository workoutDayRepo;
+    private final ExerciseRepository exerciseRepo;
+
+<span class="fc" id="L18">    public WorkoutService(WorkoutDayRepository workoutDayRepo, ExerciseRepository exerciseRepo) {</span>
+<span class="fc" id="L19">        this.workoutDayRepo = workoutDayRepo;</span>
+<span class="fc" id="L20">        this.exerciseRepo = exerciseRepo;</span>
+<span class="fc" id="L21">    }</span>
+
+    public WorkoutDay startWorkout(String type) {
+<span class="fc" id="L24">        WorkoutDay wd = new WorkoutDay();</span>
+<span class="fc" id="L25">        wd.setType(type);</span>
+<span class="fc" id="L26">        wd.setDate(LocalDate.now());</span>
+<span class="fc" id="L27">        return workoutDayRepo.save(wd);</span>
+    }
+
+    public Optional&lt;WorkoutDay&gt; getLastWorkoutByType(String type) {
+<span class="nc" id="L31">        return workoutDayRepo.findTopByTypeOrderByDateDesc(type);</span>
+    }
+
+    public WorkoutDay addExercise(Long workoutId, Exercise ex) {
+<span class="nc" id="L35">        WorkoutDay wd = workoutDayRepo.findById(workoutId)</span>
+<span class="nc" id="L36">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Workout not found&quot;));</span>
+<span class="nc" id="L37">        ex.setWorkoutDay(wd);</span>
+<span class="nc" id="L38">        exerciseRepo.save(ex);</span>
+<span class="nc" id="L39">        wd.getExercises().add(ex);</span>
+<span class="nc" id="L40">        return workoutDayRepo.save(wd);</span>
+    }
+
+    public void deleteExercise(Long exerciseId) {
+<span class="nc" id="L44">        exerciseRepo.deleteById(exerciseId);</span>
+<span class="nc" id="L45">    }</span>
+
+    public void deleteWorkout(Long workoutId) {
+<span class="nc" id="L48">        workoutDayRepo.deleteById(workoutId);</span>
+<span class="nc" id="L49">    }</span>
+
+    public WorkoutDay updateWorkout(Long workoutId, String newType) {
+<span class="nc" id="L52">        WorkoutDay wd = workoutDayRepo.findById(workoutId)</span>
+<span class="nc" id="L53">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Workout not found&quot;));</span>
+<span class="nc" id="L54">        wd.setType(newType);</span>
+<span class="nc" id="L55">        return workoutDayRepo.save(wd);</span>
+    }
+
+    public Exercise updateExercise(Long id, int repetitions, int intensity) {
+<span class="nc" id="L59">        Exercise exercise = exerciseRepo.findById(id)</span>
+<span class="nc" id="L60">                .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Exercise not found&quot;));</span>
+<span class="nc" id="L61">        exercise.setRepetitions(repetitions);</span>
+<span class="nc" id="L62">        exercise.setIntensity(intensity);</span>
+<span class="nc" id="L63">        return exerciseRepo.save(exercise);</span>
+    }
+
+    public Optional&lt;WorkoutDay&gt; getWorkout(Long id) {
+<span class="nc" id="L67">        return workoutDayRepo.findById(id);</span>
+    }
+
+    public List&lt;WorkoutDay&gt; getAllWorkouts() {
+<span class="nc" id="L71">        return workoutDayRepo.findAll();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

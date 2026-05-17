@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\controller\GymController.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\GymTrackerApplication.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\model\Exercise.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\model\WorkoutDay.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\repository\ExerciseRepository.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\repository\WorkoutDayRepository.java">
+</file>
+<file name="C:\Users\hulkk\IdeaProjects\progkorny\src\main\java\com\example\gymtracker\service\WorkoutService.java">
+</file>
+</checkstyle>

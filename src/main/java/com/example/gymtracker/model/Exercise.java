@@ -21,4 +21,13 @@ public class Exercise {
     @ManyToOne
     @JoinColumn(name = "workout_day_id")
     private WorkoutDay workoutDay;
+
+    public void setWorkoutDay(WorkoutDay wd) {
+    }
+
+    public void setRepetitions(int repetitions) {
+    }
+
+    public void setIntensity(int intensity) {
+    }
 }

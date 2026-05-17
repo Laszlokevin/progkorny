@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+gymtracker,com.example.gymtracker,GymTrackerApplication,8,0,0,0,3,0,2,0,2,0
+gymtracker,com.example.gymtracker.service,WorkoutService,103,25,0,0,22,8,11,2,11,2
+gymtracker,com.example.gymtracker.controller,GymController,54,0,0,0,14,0,10,0,10,0
+gymtracker,com.example.gymtracker.model,WorkoutDay,3,17,0,0,1,7,1,5,1,5
+gymtracker,com.example.gymtracker.model,Exercise,6,0,0,0,4,0,4,0,4,0

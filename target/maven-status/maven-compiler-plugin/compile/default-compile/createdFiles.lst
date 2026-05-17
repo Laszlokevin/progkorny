@@ -1,0 +1,7 @@
+com\example\gymtracker\model\Exercise.class
+com\example\gymtracker\repository\WorkoutDayRepository.class
+com\example\gymtracker\controller\GymController.class
+com\example\gymtracker\GymTrackerApplication.class
+com\example\gymtracker\repository\ExerciseRepository.class
+com\example\gymtracker\model\WorkoutDay.class
+com\example\gymtracker\service\WorkoutService.class
