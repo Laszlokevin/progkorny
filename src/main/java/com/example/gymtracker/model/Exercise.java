@@ -1,5 +1,6 @@
 package com.example.gymtracker.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,14 +21,18 @@ public class Exercise {
 
     @ManyToOne
     @JoinColumn(name = "workout_day_id")
+    @JsonBackReference
     private WorkoutDay workoutDay;
 
     public void setWorkoutDay(WorkoutDay wd) {
+        this.workoutDay = wd;
     }
 
     public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
     }
 
     public void setIntensity(int intensity) {
+        this.intensity = intensity;
     }
 }

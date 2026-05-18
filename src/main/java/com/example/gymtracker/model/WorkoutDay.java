@@ -1,5 +1,6 @@
 package com.example.gymtracker.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class WorkoutDay {
     private LocalDate date;
 
     @OneToMany(mappedBy = "workoutDay", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Exercise> exercises;
+    @JsonManagedReference
+    private List<Exercise> exercises = new ArrayList<>();
 
     public String getType() {
         return type;
